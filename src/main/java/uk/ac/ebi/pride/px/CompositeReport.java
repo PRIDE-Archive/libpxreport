@@ -20,7 +20,7 @@ public class CompositeReport implements Report {
     private List<Report> reports = new ArrayList<Report>();
 
     public void add(Report report) {
-        logger.debug("Adding report to composite");
+        logger.debug("Adding report '" + Report.class + "' to composite");
         reports.add(report);
     }
 

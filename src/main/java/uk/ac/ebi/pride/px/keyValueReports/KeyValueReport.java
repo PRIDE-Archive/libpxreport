@@ -80,6 +80,6 @@ public abstract class KeyValueReport implements Report {
         for (String key: getKeys()) {
             builder.build(key, getValueForKey(key));
         }
-        return false;
+        return true;
     }
 }

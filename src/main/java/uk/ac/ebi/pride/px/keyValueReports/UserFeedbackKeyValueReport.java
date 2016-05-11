@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import uk.ac.ebi.pride.px.UserFeedbackReport;
 import uk.ac.ebi.pride.px.reports.ReportBuilder;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,10 +31,12 @@ public class UserFeedbackKeyValueReport extends KeyValueReport implements UserFe
     }
 
     public void setRating(int rating) {
+        logger.debug("Setting user feedback rating to " + rating);
         storeKeyValuePair(KEY_RATING, Integer.toString(rating));
     }
 
     public void setComments(String comments) {
+        logger.debug("Setting user comments '" + comments + "'");
         storeKeyValuePair(KEY_COMMENT, comments);
     }
 
@@ -47,7 +49,11 @@ public class UserFeedbackKeyValueReport extends KeyValueReport implements UserFe
     }
 
     List<String> getKeys() {
-        return Arrays.asList(KEY_RATING, KEY_COMMENT);
+        List<String> keyList = new ArrayList<String>();
+        keyList.add(KEY_RATING);
+        keyList.add(KEY_COMMENT);
+        logger.debug("User feedback list of keys: " + keyList.toString());
+        return keyList;
     }
 
     @Override
