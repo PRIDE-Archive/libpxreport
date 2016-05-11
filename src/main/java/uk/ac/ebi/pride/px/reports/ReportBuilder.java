@@ -25,5 +25,5 @@ public interface ReportBuilder {
      * Get the built product, i.e. the report
      * @return the built report
      */
-    ReportProduct getProduct();
+    ReportProduct getProduct() throws ReportBuilderException;
 }
