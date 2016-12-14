@@ -8,19 +8,11 @@
   <name>libpxreport</name>
   <url>https://github.com/proteomexchange/libpxreport</url>
 
-  <licenses>
-    <license>
-      <name>Apache 2</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-      <comments>A business-friendly OSS license</comments>
-    </license>
-  </licenses>
-
-  <organization>
-    <name>EMBL-European Bioinformatics Institute</name>
-    <url>http://www.ebi.ac.uk</url>
-  </organization>
+  <parent>
+    <groupId>uk.ac.ebi.pride.architectural</groupId>
+    <artifactId>pride-core</artifactId>
+    <version>1.0.1</version>
+  </parent>
 
   <developers>
     <developer>
@@ -32,38 +24,33 @@
       <roles>
         <role>developer</role>
       </roles>
-      <timezone>0</timezone>
+      <timezone>Europe/London</timezone>
     </developer>
   </developers>
 
   <properties>
+    <uk.ac.ebi.pride.architectural.pride-logging.version>1.0.0</uk.ac.ebi.pride.architectural.pride-logging.version>
+    <uk.ac.ebi.pride.architectural.pride-tdd.version>1.0.3</uk.ac.ebi.pride.architectural.pride-tdd.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.test.output.dir>target/test-classes</project.test.output.dir>
     <tests.skip>true</tests.skip>
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
     <!-- logging -->
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.21</version>
+      <groupId>uk.ac.ebi.pride.architectural</groupId>
+      <artifactId>pride-logging</artifactId>
+      <version>${uk.ac.ebi.pride.architectural.pride-logging.version}</version>
+      <type>pom</type>
     </dependency>
+    <!-- TDD -->
     <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-core</artifactId>
-      <version>1.1.7</version>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.1.7</version>
+      <groupId>uk.ac.ebi.pride.architectural</groupId>
+      <artifactId>pride-tdd</artifactId>
+      <version>${uk.ac.ebi.pride.architectural.pride-tdd.version}</version>
+      <type>pom</type>
+      <scope>test</scope>
     </dependency>
     <!-- Google API dependencies -->
     <dependency>
@@ -143,7 +130,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.10</version>
         <executions>
           <execution>
             <id>copy-dependency</id>
@@ -172,26 +158,7 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
-        <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.5.3</version>
-        <configuration>
-          <remoteTagging>true</remoteTagging>
-          <goals>deploy</goals>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>2.6</version>
         <configuration>
           <!-- comment exclusion section out if want to run batch dbtest -->
           <excludes>
@@ -217,22 +184,6 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.3</version>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <configuration>
-              <additionalparam>-Xdoclint:none</additionalparam>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
 
@@ -243,21 +194,4 @@
     <url>https://github.com/proteomexchange/libpxreport.git</url>
     <tag>HEAD</tag>
   </scm>
-
-  <!-- Overwrites the previous repositories-->
-  <distributionManagement>
-    <!-- EBI repo -->
-    <repository>
-      <id>pst-release</id>
-      <name>EBI Nexus Repository</name>
-      <url>http://www.ebi.ac.uk/Tools/maven/repos/content/repositories/pst-release</url>
-    </repository>
-    <!-- EBI SNAPSHOT repo -->
-    <snapshotRepository>
-      <uniqueVersion>false</uniqueVersion>
-      <id>pst-snapshots</id>
-      <name>EBI Nexus Snapshots Repository</name>
-      <url>http://www.ebi.ac.uk/Tools/maven/repos/content/repositories/pst-snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
 </project>
